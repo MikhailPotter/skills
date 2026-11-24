@@ -14,13 +14,17 @@ npx skills@latest add MikhailPotter/skills --skill "*"
 
 Choose your agent and select **Project** if prompted for the installation scope. The command installs the four workflow skills and their shared review helper.
 
-**Try Problem.** Open a new chat in the project, select **Problem**, and give it a user report to investigate.
+To check the installation, run the following from the same project:
 
-> **Report:** “I saw *Saved*, refreshed the editor, and lost my last paragraph.”
->
-> **Acceptance check:** Add a paragraph, wait for *Saved*, then refresh the draft. The restored paragraph must match the edit.
->
-> **Independent review:** Give a fresh reviewer the brief and the exact revision of the fix. Ask them to repeat the check and report what the editor restored.
+```sh
+npx skills@latest list
+```
+
+Look for five entries from `MikhailPotter/skills`: `execute`, `independent-review`, `plan`, `problem`, and `review`.
+
+**Try Problem.** Open a new chat in the project, select **Problem**, and ask “I saw *Saved*, refreshed the editor, and lost my last paragraph. Help me define what we need to fix.”
+
+Problem might reply, “The editor acknowledged the edit, but reopening the draft lost it. To check a fix, add a paragraph, wait for *Saved*, then refresh the same draft. The restored paragraph should match the edit. We still need to find where the text was lost.” [Follow this example through planning, implementation, and independent review.](docs/workflow.md)
 
 ## How the team works
 
@@ -35,8 +39,22 @@ Choose your agent and select **Project** if prompted for the installation scope.
 
 **Execute includes verification.** Both Execute and Review use [Independent review](skills/independent-review/SKILL.md), the fifth skill in the bundle. Each question requiring independent judgment goes to a reviewer who did not author the change. They receive the brief, criteria, and exact revision in a fresh context. If a required reviewer is unavailable, that check stays pending.
 
-[Walk through the draft-saving issue](docs/workflow.md) to see the interview, task dependencies, a scope decision, and the correction loop.
-
 ## Updates
 
-To update the installed workflow later, run `npx skills@latest update` from the same project.
+See the [release notes](RELEASE-NOTES.md) for changes and migration guidance.
+
+To update these five project skills, run this command from the project where you installed them:
+
+```sh
+npx skills@latest update --project execute independent-review plan problem review
+```
+
+## Feedback and contributions
+
+For installation issues, [open an issue](https://github.com/MikhailPotter/skills/issues) with your agent, the output of `npx skills@latest --version`, the command you ran, and the result you saw.
+
+Before submitting a pull request, run `python3 scripts/check-install.py` from your checkout with Node.js, npm, Git, and Python 3 installed. The check installs the checkout into a temporary project and verifies the bundle and its documentation links.
+
+## License
+
+Released under the [MIT License](LICENSE).
