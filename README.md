@@ -14,17 +14,41 @@ npx skills@latest add MikhailPotter/skills --skill "*"
 
 Choose your agent and select **Project** if prompted for the installation scope. The command installs the four workflow skills and their shared review helper.
 
-To check the installation, run the following from the same project:
+## Try it on your own bug
+
+Open a new chat with your coding agent in the project where you installed the skills. Type `$problem`, select the skill, and describe one bug. Include what you did, what happened, and what you expected. For example:
+
+```text
+$problem I saved Europe/Paris as my time zone in Settings. When I refreshed the page, it showed UTC again. I expected my saved choice to stick.
+```
+
+The agent checks the relevant code and may ask a follow-up question. You get a short brief in the chat with the symptom, the expected behavior, and a way to tell whether a fix worked. For this bug, the check could be:
+
+> Save Europe/Paris, refresh Settings, and check that the selected time zone is still Europe/Paris.
+
+Once the brief matches your bug, send this in the same chat:
+
+```text
+$plan Use the brief above to plan the fix. Include a regression test for the refresh case.
+```
+
+You get a plan with tasks and acceptance criteria. When you're ready for code changes, send:
+
+```text
+$execute Implement the plan above and show whether the saved time zone survives a refresh.
+```
+
+Execute reports the changes and verification results, including any checks it couldn't complete. For another example, [follow a lost editor draft from bug report through independent review](docs/workflow.md).
+
+### Check your installation
+
+If your agent doesn't show `$problem`, run this in the same project:
 
 ```sh
 npx skills@latest list
 ```
 
 Look for five entries from `MikhailPotter/skills`: `execute`, `independent-review`, `plan`, `problem`, and `review`.
-
-**Try Problem.** Open a new chat in the project, select **Problem**, and ask “I saw *Saved*, refreshed the editor, and lost my last paragraph. Help me define what we need to fix.”
-
-Problem might reply, “The editor acknowledged the edit, but reopening the draft lost it. To check a fix, add a paragraph, wait for *Saved*, then refresh the same draft. The restored paragraph should match the edit. We still need to find where the text was lost.” [Follow this example through planning, implementation, and independent review.](docs/workflow.md)
 
 ## How the team works
 
