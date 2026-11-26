@@ -16,7 +16,7 @@ Choose your agent and select **Project** if prompted for the installation scope.
 
 ## Try it on your own bug
 
-Open a new chat with your coding agent in the project where you installed the skills. Type `$problem`, select the skill, and describe one bug. Include what you did, what happened, and what you expected. For example:
+Open a chat with your coding agent in the project where you installed the skills. Select the `problem` skill and describe one bug. The examples below use `$skill` mentions. If your agent uses a skill menu or another syntax, select the named skill there and send the text that follows. Include what you did, what happened, and what you expected. For example:
 
 ```text
 $problem I saved Europe/Paris as my time zone in Settings. When I refreshed the page, it showed UTC again. I expected my saved choice to stick.
@@ -42,7 +42,7 @@ Execute reports the changes and verification results, including any checks it co
 
 ### Check your installation
 
-If your agent doesn't show `$problem`, run this in the same project:
+If the skill is missing from your agent’s skill list, run the following command from your project root.
 
 ```sh
 npx skills@latest list
